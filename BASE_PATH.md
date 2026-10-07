@@ -314,6 +314,11 @@ example.com {
 Keep the global `servers.timeouts.read_body` well above the relay's `long_poll`,
 as in `deploy/Caddyfile`.
 
+`deploy/install-nginx.sh` automates this mode: it installs the relay and MTProxy
+without Caddy, never writes to `/etc/nginx`, and prints the `upstream`/`location`
+snippet (and, for a static site, the loopback mirror block) for you to merge,
+validate with `nginx -t`, and reload.
+
 ## 5. Rolling out on a domain you already own
 
 1. Keep the website exactly where it is, reachable on loopback (`127.0.0.1:3000`

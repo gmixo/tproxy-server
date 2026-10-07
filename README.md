@@ -93,6 +93,11 @@ The automated installer is intended for a clean server on which Caddy may own po
 active Caddy configuration. If the server already hosts other sites, use the manual
 integration section instead.
 
+To co-host the relay on a hostname whose site is already served by nginx, use
+`deploy/install-nginx.sh` instead. It skips Caddy, leaves `/etc/nginx` and the
+existing TLS certificates untouched, and prints the prefix `location` (BASE_PATH.md
+mode B) for you to merge and reload.
+
 ## 1. Choose the hostname and secret
 
 At your DNS provider, add an `A` record:
@@ -472,6 +477,9 @@ it. To put a relay on a domain that already serves a real site, or simply to mov
 the carrier off well-known root paths, configure a base path and route only that
 prefix to the relay. [BASE_PATH.md](BASE_PATH.md) covers the two deployment modes,
 the nginx and Caddy front-proxy configuration, slug generation, and rollout.
+`deploy/install-nginx.sh` automates mode B on a server whose site already runs
+behind nginx; it never writes to `/etc/nginx` and prints the prefix snippet to
+merge.
 
 ## Multiple secrets on one hostname
 
